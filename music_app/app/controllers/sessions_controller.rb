@@ -21,7 +21,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy #logout button
-    user.destroy
+    logout
+    redirect_to new_session_url
   end
 
 end

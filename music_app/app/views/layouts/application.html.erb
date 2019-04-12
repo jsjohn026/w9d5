@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MusicApp</title>
+    <title>Music App</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,6 +9,21 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= yield %>
+    <div class="main-content" >
+
+      <h1 class="main-logo" > Music App</h1>
+      <% if logged_in? %>
+      <form action="<%= session_url %>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        
+        <input class="button" type="submit" value="logout">
+      </form>
+      <% else %>
+      <a href="<%= new_user_url %>" class="button" >Sign Up</a>
+      <% end %>
+      <%= yield %>
+      <%= flash[:errors] if flash[:errors] %>
+    </div>
   </body>
 </html>

@@ -19,7 +19,7 @@ class User < ApplicationRecord
   attr_reader :password
 
   def self.generate_session_token
-    SecureRandom::urlsafe_64(16)
+    SecureRandom::urlsafe_base64(16)
   end
 
   def self.find_by_credentials(email, password)
